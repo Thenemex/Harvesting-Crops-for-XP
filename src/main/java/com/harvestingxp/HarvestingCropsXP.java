@@ -10,12 +10,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 
 @SuppressWarnings("removal")
-@Mod(HarvestingXP.MODID)
-public class HarvestingXP {
+@Mod(HarvestingCropsXP.MODID)
+public class HarvestingCropsXP {
 
-    public static final String MODID = "harvestingxp", MODVERSION = "1.0";
+    public static final String MODID = "harvestingcropsforxp";
 
-    public HarvestingXP() {
+    public HarvestingCropsXP() {
         MinecraftForge.EVENT_BUS.register(this);
         // Loading config
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC, "Harvesting-XP.toml");

@@ -1,5 +1,6 @@
-package com.harvestingxp;
+package com.harvestingxp.config;
 
+import com.harvestingxp.HarvestingCropsXP;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.common.Mod;
 

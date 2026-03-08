@@ -1,6 +1,7 @@
-package com.harvestingxp.events;
+package com.harvestingxp.model.events;
 
-import com.harvestingxp.Config;
+import com.harvestingxp.config.Config;
+import com.harvestingxp.api.events.EventHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.level.block.CropBlock;

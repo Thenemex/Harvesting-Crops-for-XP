@@ -1,7 +1,8 @@
 package com.harvestingxp;
 
-import com.harvestingxp.events.EventHandler;
-import com.harvestingxp.events.PlayerHarvestingCropsEvent;
+import com.harvestingxp.api.events.EventHandler;
+import com.harvestingxp.config.Config;
+import com.harvestingxp.model.events.PlayerHarvestingCropsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;

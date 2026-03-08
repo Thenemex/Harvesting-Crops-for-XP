@@ -64,6 +64,13 @@ public class Config {
         SPEC = pair.getRight();
     }
 
+    // Count settings
+    public static boolean isCountEnabled() {
+        return VALUES.COUNT_ENABLED.get();
+    }
+    public static int getCountLimitValue() {
+        return VALUES.COUNT_AMOUNT.get();
+    }
     // Give XP to Player
     public static boolean isGiveXpToPlayerEnabled() {
         return VALUES.GIVE_XP_TO_PLAYER_ENABLED.get();

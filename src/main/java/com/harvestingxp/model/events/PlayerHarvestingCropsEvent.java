@@ -20,8 +20,6 @@ public class PlayerHarvestingCropsEvent implements EventHandler {
         this.isOrbEnabled = Config.isSpawnXpOrbEnabled();
         this.xpGivenValue = Config.getXpGivenValue();
         this.xpOrbValue = Config.getXpOrbValue();
-        if (isGiveXpEnabled || isOrbEnabled)
-            MinecraftForge.EVENT_BUS.register(this);
     }
 
     @SubscribeEvent
@@ -29,12 +27,17 @@ public class PlayerHarvestingCropsEvent implements EventHandler {
         if (!event.getLevel().isClientSide && event.getLevel().isLoaded(event.getPos())) {
             BlockState blockState = event.getLevel().getBlockState(event.getPos());
             if (blockState.getBlock() instanceof CropBlock crop && crop.isMaxAge(blockState)) {
-                BlockPos pos = event.getPos();
-                if (isOrbEnabled)
+                if (isGiveXpEnabled) event.getEntity().giveExperiencePoints(xpGivenValue);
+                if (isOrbEnabled) {
+                    BlockPos pos = event.getPos();
                     event.getLevel().addFreshEntity(new ExperienceOrb(event.getLevel(), pos.getX(), pos.getY(), pos.getZ(), xpOrbValue));
-                if (isGiveXpEnabled)
-                    event.getEntity().giveExperiencePoints(xpGivenValue);
+                }
             }
         }
+    }
+
+    @Override
+    public void register() {
+        MinecraftForge.EVENT_BUS.register(this);
     }
 }

@@ -1,3 +1,7 @@
 package com.harvestingxp.api.events;
 
-public interface EventHandler {}
+public interface EventHandler {
+
+    void register();
+
+}

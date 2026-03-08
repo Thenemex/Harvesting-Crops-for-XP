@@ -2,6 +2,7 @@ package com.harvestingxp;
 
 import com.harvestingxp.api.events.EventHandler;
 import com.harvestingxp.config.Config;
+import com.harvestingxp.model.events.PlayerHarvestingCropsCountEvent;
 import com.harvestingxp.model.events.PlayerHarvestingCropsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -11,15 +12,13 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-import java.util.ArrayList;
-
 @SuppressWarnings("removal")
 @Mod(HarvestingCropsXP.MODID)
 public class HarvestingCropsXP {
 
     public static final String MODID = "harvestingcropsforxp";
 
-    public static final ArrayList<EventHandler> handlers = new ArrayList<>(5);
+    public EventHandler handler;
 
     public HarvestingCropsXP() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -33,7 +32,10 @@ public class HarvestingCropsXP {
 
     protected void commonSetup(final FMLCommonSetupEvent event) {
         // Instanciating handlers
-        EventHandler handler = new PlayerHarvestingCropsEvent();
-        handlers.add(handler);
+        if (Config.isGiveXpToPlayerEnabled() || Config.isSpawnXpOrbEnabled()) {
+            if (Config.isCountEnabled()) handler = new PlayerHarvestingCropsCountEvent();
+            else handler = new PlayerHarvestingCropsEvent();
+            handler.register();
+        }
     }
 }

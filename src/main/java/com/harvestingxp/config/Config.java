@@ -10,11 +10,26 @@ public class Config {
     public static final ForgeConfigSpec SPEC;
     public static final Values VALUES;
 
+    protected static final int DEF = 5, MIN = 1, MAX = 10000;
+
     public static class Values {
-        private final ForgeConfigSpec.BooleanValue GIVE_XP_TO_PLAYER_ENABLED, SPAWN_XP_ORB_ENABLED;
-        private final ForgeConfigSpec.IntValue XP_GIVEN_TO_PLAYER_AMOUNT, XP_ORB_VALUE_AMOUNT;
+        private final ForgeConfigSpec.BooleanValue COUNT_ENABLED, GIVE_XP_TO_PLAYER_ENABLED, SPAWN_XP_ORB_ENABLED;
+        private final ForgeConfigSpec.IntValue COUNT_AMOUNT, XP_GIVEN_TO_PLAYER_AMOUNT, XP_ORB_VALUE_AMOUNT;
 
         private Values(ForgeConfigSpec.Builder builder) {
+            builder.push("Count settings");
+            {
+                COUNT_ENABLED = builder
+                        .comment(" Will trigger the effects chosen in the config, every N crops harvested")
+                        .define("count_enabled", false);
+
+                COUNT_AMOUNT = builder
+                        .comment(" Every N crops harvested, the effects chosen in the config will trigger")
+                        .defineInRange("count_value", DEF, MIN, MAX);
+
+                builder.pop();
+            }
+
             builder.push("Give XP to Player");
             {
                 GIVE_XP_TO_PLAYER_ENABLED = builder
@@ -23,7 +38,7 @@ public class Config {
 
                 XP_GIVEN_TO_PLAYER_AMOUNT = builder
                         .comment(" The amount of XP the player will receive")
-                        .defineInRange("xpGiven_value", 5, 0, 100);
+                        .defineInRange("xpGiven_value", DEF, MIN, MAX);
 
                 builder.pop();
             }
@@ -36,7 +51,7 @@ public class Config {
 
                 XP_ORB_VALUE_AMOUNT = builder
                         .comment(" The amount of XP contained in the orb")
-                        .defineInRange("xpOrb_value", 5, 0, 100);
+                        .defineInRange("xpOrb_value", DEF, MIN, MAX);
 
                 builder.pop();
             }
